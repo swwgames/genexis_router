@@ -7,7 +7,7 @@ from typing import List
 from .data_classes import Firmware, Status, IPv4Status, IPv4Reservation, IPv4DHCPLease, Device
 
 class GenexisRouter:
-    def __init__(self, host: str, username: str = 'admin', password: str = 'admin', logger: Logger = None, verify_ssl: bool = False, timeout: int = 10) -> None:
+    def __init__(self, host: str, username: str = 'admin', password: str, logger: Logger = None, verify_ssl: bool = False, timeout: int = 10) -> None:
         self.host = host
         if not (self.host.startswith('http://') or self.host.startswith('https://')):
             self.host = f"http://{self.host}"
