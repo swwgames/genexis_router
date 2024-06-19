@@ -107,6 +107,7 @@ class GenexisRouter:
         wireless = self.request('wireless.get', params)
         wireless_guest = self.request('wireless.guest.get', params)
         dhcp_data = self.request('clients.get', params)
+        device_info_data = self.request("genui.info", params)
 
         clients = dhcp_data['result']['clients']
         mac_ip_dict = {client['macaddr']: client['ipaddr'] for client in clients}
@@ -128,8 +129,8 @@ class GenexisRouter:
                 _5g_enable = interface['enable']
 
         status = Status(
-            wan_macaddr=macaddress.EUI48(result['internet']['macaddr']) if 'internet' in result else None,
-            lan_macaddr=macaddress.EUI48(result['lan']['macaddr']),
+            wan_macaddr=macaddress.EUI48(device_info_data['result']['deviceinfo']['macaddr']) if 'deviceinfo' in device_info_data['result'] else "00:00:00:00:00:00",
+            lan_macaddr=macaddress.EUI48(device_info_data['result']['deviceinfo']['macaddr']) if 'deviceinfo' in device_info_data['result'] else "00:00:00:00:00:00",
             wan_ipv4_addr=ipaddress.IPv4Address(result['internet']['ipaddr']) if 'internet' in result else None,
             lan_ipv4_addr=ipaddress.IPv4Address(result['lan']['ipaddr']) if 'lan' in result else None,
             wan_ipv4_gateway=ipaddress.IPv4Address(result['internet']['gateway']) if 'internet' in result else None,
