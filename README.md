@@ -1,3 +1,6 @@
+# !!This repo is closed!!
+As I do not own this router anymore, I will not beable to work on this repo.
+Feel free to copy.
 # Genexis Router API
 
 This project connects to the Genexis router and retrieves data from the router.
